@@ -1,0 +1,27 @@
+{
+  "name": "pandora-boilerplate",
+  "description": "An HTML Boilerplate to start a project.",
+  "main": "",
+  "authors": [
+    "Miguel Morera"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "normalize.styl": "~3.0.3",
+    "modernizr-lite": "*"
+  }
+}
