@@ -6,14 +6,16 @@ var gulp        = require('gulp'),
     notify      = require("gulp-notify"),
     minify      = require('gulp-minify-css'),
     concat      = require('gulp-concat'),
-    uglify      = require('gulp-uglify');
+    uglify      = require('gulp-uglify'),
+    del         = require('del'),
+    runSequence = require('run-sequence').use(gulp);
 
 // Compile Stylus CSS
 gulp.task('style', function () {
     gulp.src('src/assets/css/styl/main.styl')
         .pipe(stylus({use: nib()}))
         .pipe(rename('style.css'))
-        .pipe(minify({compatibility: 'ie8'}))
+        .pipe(minify())
         .pipe(gulp.dest('src/assets/css'))
         .pipe(notify('CSS Compiled!'))
     ;
@@ -35,6 +37,25 @@ gulp.task('js', function(){
         .pipe(gulp.dest('src/assets/js'))        
         .pipe(uglify())
         .pipe(gulp.dest('src/assets/js'));
+});
+
+gulp.task('cleanBuild', function () {
+    return del('build');
+});
+
+gulp.task('copy', function() {
+    gulp.src('src/assets/css/style.css')
+        .pipe(gulp.dest('build/assets/css/'))
+    gulp.src('src/assets/js/javascript.js')
+        .pipe(gulp.dest('build/assets/js/'))
+    gulp.src('src/assets/img/*')
+        .pipe(gulp.dest('build/assets/img/'))
+    gulp.src('src/*.html')
+        .pipe(gulp.dest('build/'));
+});
+
+gulp.task('build', function(callback) {
+    runSequence('style', 'js', 'copy', callback);    
 });
 
 // Default gulp task to run 
