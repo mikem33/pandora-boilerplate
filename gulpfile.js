@@ -3,21 +3,22 @@ var gulp        = require('gulp'),
     nib         = require('nib'),
     watch       = require('gulp-watch'),
     rename      = require("gulp-rename"),
-    notify      = require("gulp-notify"),
-    minify      = require('gulp-minify-css'),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
     del         = require('del'),
     runSequence = require('run-sequence').use(gulp);
 
+// If you want to be notified when a compiling is done, you can install this package.
+// notify = require("gulp-notify"),
+
 // Compile Stylus CSS
 gulp.task('style', function () {
     gulp.src('src/assets/css/styl/main.styl')
-        .pipe(stylus({use: nib()}))
+        .pipe(stylus({compress: true, use: nib()}))
         .pipe(rename('style.css'))
-        .pipe(minify())
         .pipe(gulp.dest('src/assets/css'))
-        .pipe(notify('CSS Compiled!'))
+        // Uncomment if you have installed this package for notifications.
+        //.pipe(notify('CSS Compiled!'))
     ;
 });
 
