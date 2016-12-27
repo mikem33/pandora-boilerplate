@@ -33,7 +33,7 @@ gulp.task('watch-js', function() {
 
 // Generate Javascript
 gulp.task('js', function(){
-    return gulp.src(['bower_components/jquery/dist/jquery.min.js','bower_components/modernizr-lite/modernizr.js','main.js'])
+    return gulp.src(['bower_components/jquery/dist/jquery.min.js','bower_components/modernizr/modernizr.custom.js','main.js'])
         .pipe(concat('javascript.js'))
         .pipe(gulp.dest('src/assets/js'))        
         .pipe(uglify())

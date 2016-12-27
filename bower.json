@@ -20,8 +20,8 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4",
-    "normalize.styl": "~3.0.3",
-    "modernizr-lite": "*"
+    "jquery": "~3.1.1",
+    "normalize.styl": "~4.1.1",
+    "modernizr": "https://modernizr.com/download/?ie8compat-touchevents-printshiv-setclasses-shiv"
   }
 }
