@@ -46,6 +46,8 @@ gulp.task('copy', function() {
         .pipe(gulp.dest('build/assets/css/'))
     gulp.src('src/assets/js/javascript.js')
         .pipe(gulp.dest('build/assets/js/'))
+    gulp.src('bower_components/picturefill/dist/picturefill.min.js')
+        .pipe(gulp.dest('build/assets/js/'))
     gulp.src('src/assets/img/*')
         .pipe(gulp.dest('build/assets/img/'))
     gulp.src('src/*.html')

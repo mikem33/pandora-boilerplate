@@ -10,7 +10,7 @@
     "globals",
     "node"
   ],
-  "homepage": "",
+  "homepage": "https://github.com/mikem33/pandora-boilerplate",
   "private": true,
   "ignore": [
     "**/.*",
@@ -22,6 +22,7 @@
   "dependencies": {
     "jquery": "~3.1.1",
     "normalize.styl": "~4.1.1",
-    "modernizr": "https://modernizr.com/download/?ie8compat-touchevents-printshiv-setclasses-shiv"
+    "modernizr": "https://modernizr.com/download/?ie8compat-touchevents-printshiv-setclasses-shiv",
+    "picturefill": "^3.0.3"
   }
 }
