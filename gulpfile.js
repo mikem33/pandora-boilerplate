@@ -7,9 +7,9 @@ var gulp        = require('gulp'),
     uglify      = require('gulp-uglify'),
     del         = require('del'),
     runSequence = require('run-sequence').use(gulp);
-
-// If you want to be notified when a compiling is done, you can install this package.
-// notify = require("gulp-notify"),
+    // If you want to be notified when a compiling is done, you can install this package.
+    // Only working on macOS at the moment.
+    // notify = require("gulp-notify"),
 
 // Compile Stylus CSS
 gulp.task('style', function () {
@@ -17,23 +17,20 @@ gulp.task('style', function () {
         .pipe(stylus({compress: true, use: nib()}))
         .pipe(rename('style.css'))
         .pipe(gulp.dest('src/assets/css'))
-        // Uncomment if you have installed this package for notifications.
+        // Uncomment this if you have installed this package for notifications.
         //.pipe(notify('CSS Compiled!'))
     ;
 });
 
 // Watch
-gulp.task('watch-css', function() {
-    gulp.watch('src/assets/css/styl/*.styl', ['style']);
-});
-
-gulp.task('watch-js', function() {
+gulp.task('watch', function() {
     gulp.watch('src/assets/js/main.js', ['js']);
+    gulp.watch('src/assets/css/styl/*.styl', ['style']);
 });
 
 // Generate Javascript
 gulp.task('js', function(){
-    return gulp.src(['bower_components/jquery/dist/jquery.min.js','bower_components/modernizr/modernizr.custom.js','main.js'])
+    return gulp.src(['bower_components/jquery/dist/jquery.min.js','bower_components/modernizr/modernizr.custom.js','src/assets/js/libraries/*.js'])
         .pipe(concat('javascript.js'))
         .pipe(gulp.dest('src/assets/js'))        
         .pipe(uglify())
