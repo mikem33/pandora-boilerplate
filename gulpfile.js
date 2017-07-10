@@ -6,9 +6,9 @@ var nib         = require('nib'),
     rename      = require("gulp-rename"),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
+    notify      = require("gulp-notify"),
     critical    = require('critical').stream,
     runSequence = require('run-sequence').use(gulp);
-    notify = require("gulp-notify"),
 
 // Compile Stylus CSS
 gulp.task('style', function () {
