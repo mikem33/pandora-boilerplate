@@ -46,7 +46,6 @@ gulp.task('critical', function () {
             width: 1300,
             height: 900,
             minify: true,
-            extract: false,
             pathPrefix: '/'
         }))
         .on('error', function(err) { gutil.log(gutil.colors.red(err.message)); })
