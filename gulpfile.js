@@ -1,15 +1,14 @@
-var gulp        = require('gulp'),
-    stylus      = require('gulp-stylus'),
-    nib         = require('nib'),
+var nib         = require('nib'),
+    del         = require('del'),
+    gulp        = require('gulp'),
     watch       = require('gulp-watch'),
+    stylus      = require('gulp-stylus'),
     rename      = require("gulp-rename"),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
-    del         = require('del'),
+    critical    = require('critical').stream,
     runSequence = require('run-sequence').use(gulp);
-    // If you want to be notified when a compiling is done, you can install this package.
-    // Only working on macOS at the moment.
-    // notify = require("gulp-notify"),
+    notify = require("gulp-notify"),
 
 // Compile Stylus CSS
 gulp.task('style', function () {
@@ -17,8 +16,7 @@ gulp.task('style', function () {
         .pipe(stylus({compress: true, use: nib()}))
         .pipe(rename('style.css'))
         .pipe(gulp.dest('src/assets/css'))
-        // Uncomment this if you have installed this package for notifications.
-        //.pipe(notify('CSS Compiled!'))
+        .pipe(notify('CSS Compiled!'))
     ;
 });
 
@@ -37,6 +35,24 @@ gulp.task('js', function(){
         .pipe(gulp.dest('src/assets/js'));
 });
 
+// Generate & Inline Critical-path CSS
+gulp.task('critical', function () {
+    return gulp.src('src/*.html')
+        .pipe(critical({
+            base: 'src/', 
+            inline: true,
+            dest: '/build',
+            css: ['src/assets/css/style.css'],
+            width: 1300,
+            height: 900,
+            minify: true,
+            extract: false,
+            pathPrefix: '/'
+        }))
+        .on('error', function(err) { gutil.log(gutil.colors.red(err.message)); })
+        .pipe(gulp.dest('build'));
+});
+
 gulp.task('cleanBuild', function () {
     return del('build');
 });
@@ -50,12 +66,10 @@ gulp.task('copy', function() {
         .pipe(gulp.dest('build/assets/js/'))
     gulp.src('src/assets/img/*')
         .pipe(gulp.dest('build/assets/img/'))
-    gulp.src('src/*.html')
-        .pipe(gulp.dest('build/'));
 });
 
 gulp.task('build', function(callback) {
-    runSequence('style', 'js', 'copy', callback);    
+    runSequence('style', 'js', 'critical', 'copy', callback);    
 });
 
 // Default gulp task to run 
