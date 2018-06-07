@@ -41,15 +41,6 @@ gulp.task('style', function () {
     ;
 });
 
-gulp.task('styles', function () {
-    gulp.src('wp-content/themes/vithas-indentia/assets/css/styl/main.styl')
-        .pipe(stylus({ compress: false, use: nib(), 'include css': true}))
-        .on('error', swallowError)
-        .pipe(rename('style.css'))
-        .pipe(gulp.dest('wp-content/themes/vithas-indentia/'))        
-    ;
-});
-
 // Generate Javascript
 gulp.task('js', function(){
     return gulp.src(['src/assets/js/compile/vendor/jquery.js','src/assets/js/compile/vendor/*.js','src/assets/js/compile/*.js'])
@@ -62,7 +53,7 @@ gulp.task('js', function(){
 // Watch
 gulp.task('watch', function() {
     gulp.watch('src/assets/js/compile/*.js', ['js']);
-    gulp.watch('src/assets/css/styl/*.styl', ['style']);
+    gulp.watch('src/assets/css/compile/styl/*.styl', ['style']);
 });
 
 // Generate & Inline Critical-path CSS
