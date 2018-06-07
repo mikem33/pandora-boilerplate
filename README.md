@@ -30,7 +30,7 @@ Also it will instal a _jQuery_ library, a customized lite version of _Modernizr_
 ## Developing
 When we have made all the previous setup we have to start to work in the "source" folder.
 
-The tasks that you can use for developing your project are basically **CSS compiling and javascript files concatenation**. We have to use `gulp watch` for watch changes in the files that we are working on. This watch task it will watch if there are any changes in all the `.styl` files in the _CSS_ folder and the changes in the file `main.js`. I you want to add more _javascript_ files feel free to add to the corresponding task.
+The tasks that you can use for developing your project are basically **CSS compiling and javascript files concatenation**. We have to use `gulp watch` for watch changes in the files that we are working on. This task will watch if there are any changes in any of the `.styl` files in the _CSS_ folder and the changes in any of the custom javascript files.
 
 When a change is detected in these files the compiling task (in the case of _CSS_) or the concatenation task (in the case of _JS_) it will be launched.
 
