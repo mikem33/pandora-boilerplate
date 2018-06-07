@@ -2,17 +2,10 @@
 A **HTML5 Boilerplate** to start a project.
 This package is designed to have a **simple development environment** in one folder (src) and a **result files folder** (build) that it will be deployed to production. I am using [Stylus](http://stylus-lang.com) for preprocessing _CSS_.
 
-The first thing you have to do to start to work is install _Bower_ dependencies:
-```
-bower install
-```
-This will install a _jQuery_ library, a customized lite version of _Modernizr_, a version of _Normalize.css_ that it comes in _Stylus_ style and the _PictureFill_ library to deal with responsive images.
-
-The next thing to do is install the gulp packages:
+The first thing you have to do to start to work is install _NPM_ dependencies:
 ```
 npm install --save
 ```
-
 This will install all the necessary stuff to start to work. 
 ```javascript
 var nib         = require('nib'),
@@ -24,12 +17,15 @@ var nib         = require('nib'),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
     notify      = require("gulp-notify"),
+    modernizr   = require('gulp-modernizr'),
     critical    = require('critical').stream,
     runSequence = require('run-sequence').use(gulp);
-
 ```
+
 > The module [gulp-notify](https://github.com/mikaelbr/gulp-notify) is totally optional. I found it very useful to get notifications when I'm developing a project.
 > If you are using Windows this module is not working right now. I have to resolve this issue.
+
+Also it will instal a _jQuery_ library, a customized lite version of _Modernizr_, the reset _Normalize.css_ and the _PictureFill_ library to deal with responsive images.
 
 ## Developing
 When we have made all the previous setup we have to start to work in the "source" folder.
@@ -42,7 +38,11 @@ When a change is detected in these files the compiling task (in the case of _CSS
 // Compile Stylus CSS
 gulp.task('style', function () {
     gulp.src('src/assets/css/styl/main.styl')
-        .pipe(stylus({compress: true, use: nib()}))
+        .pipe(stylus({
+            compress: true, 
+            use: nib(),
+            'include css': true
+        }))
         .pipe(rename('style.css'))
         .pipe(gulp.dest('src/assets/css'))
         .pipe(notify('CSS Compiled!'))
@@ -51,7 +51,7 @@ gulp.task('style', function () {
 
 // Generate Javascript
 gulp.task('js', function(){
-    return gulp.src(['bower_components/jquery/dist/jquery.min.js','bower_components/modernizr/modernizr.custom.js','src/assets/js/libraries/*.js'])
+    return gulp.src(['src/assets/js/compile/vendor/jquery.js','src/assets/js/compile/vendor/*.js','src/assets/js/compile/*.js'])
         .pipe(concat('javascript.js'))
         .pipe(gulp.dest('src/assets/js'))        
         .pipe(uglify())
@@ -60,13 +60,10 @@ gulp.task('js', function(){
 
 // Watch
 gulp.task('watch', function() {
-    gulp.watch('src/assets/js/main.js', ['js']);
-    gulp.watch('src/assets/css/styl/*.styl', ['style']);
+    gulp.watch('src/assets/js/compile/*.js', ['js']);
+    gulp.watch('src/assets/css/compile/styl/*.styl', ['style']);
 });
 ```
 > Also we have a task for putting inline all the critical _CSS_ styles and _javascript_ to improve the loading performance. This task could be used as a solo task but I recommend using it when we finish the project because it generates _HTML_ files for production purposes.
 
-When we finish our work, we will use `gulp build` to generate the final project that we are using as production project. This task will copy to the `build` folder all the necessary files to deploy the project.
-
-
-
+When we finish our work, we will use `gulp build` to generate the final project that we are using as production site. This task will copy to the `build` folder all the necessary files to deploy the project.
