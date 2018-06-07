@@ -1,0 +1,10 @@
+{
+  "options": [
+    "html5shiv",
+    "html5printshiv",
+    "setClasses"
+  ],
+  "tests": [
+    "touchevents"
+  ]
+}
