@@ -23,14 +23,13 @@ var nib         = require('nib'),
 ```
 
 > The module [gulp-notify](https://github.com/mikaelbr/gulp-notify) is totally optional. I found it very useful to get notifications when I'm developing a project.
-> If you are using Windows this module is not working right now. I have to resolve this issue.
 
 Also it will instal a _jQuery_ library, a customized lite version of _Modernizr_, the reset _Normalize.css_ and the _PictureFill_ library to deal with responsive images.
 
 ## Developing
-When we have made all the previous setup we have to start to work in the "source" folder.
+When we finish the previous setup we will can to start our work in the "source" folder.
 
-The tasks that you can use for developing your project are basically **CSS compiling and javascript files concatenation**. We have to use `gulp watch` for watch changes in the files that we are working on. This task will watch if there are any changes in any of the `.styl` files in the _CSS_ folder and the changes in any of the custom javascript files.
+The tasks you can use for developing your project are basically **CSS compiling and javascript files concatenation**. We have to use the command `gulp watch` for watch changes in the files that we are working on. This task will watch if there are any changes in any of the `.styl` files in the _CSS_ folder and also the changes in any of the custom javascript files.
 
 When a change is detected in these files the compiling task (in the case of _CSS_) or the concatenation task (in the case of _JS_) it will be launched.
 
