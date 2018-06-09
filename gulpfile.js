@@ -1,6 +1,7 @@
 var nib         = require('nib'),
     del         = require('del'),
     gulp        = require('gulp'),
+    log         = require('fancy-log'),
     watch       = require('gulp-watch'),
     stylus      = require('gulp-stylus'),
     rename      = require("gulp-rename"),
@@ -60,7 +61,7 @@ gulp.task('watch', function() {
 gulp.task('critical', function () {
     return gulp.src('src/*.html')
         .pipe(critical({
-            base: 'src/', 
+            base: 'src/',
             inline: true,
             dest: '/build',
             css: ['src/assets/css/style.css'],
@@ -69,7 +70,7 @@ gulp.task('critical', function () {
             minify: true,
             pathPrefix: '/'
         }))
-        .on('error', function(err) { gutil.log(gutil.colors.red(err.message)); })
+        .on('error', function(err) { log.error(err.message); })
         .pipe(gulp.dest('build'));
 });
 
@@ -87,7 +88,7 @@ gulp.task('copy', function() {
 });
 
 gulp.task('build', function(callback) {
-    runSequence('style', 'js', 'critical', 'copy', callback);
+    runSequence('style', 'js', 'copy', 'critical', callback);
 });
 
 // Default gulp task to run 
