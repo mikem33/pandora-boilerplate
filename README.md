@@ -11,12 +11,14 @@ This will install all the necessary stuff to start to work.
 var nib         = require('nib'),
     del         = require('del'),
     gulp        = require('gulp'),
+    log         = require('fancy-log'),
     watch       = require('gulp-watch'),
     stylus      = require('gulp-stylus'),
     rename      = require("gulp-rename"),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
     notify      = require("gulp-notify"),
+    cleanCSS    = require('gulp-clean-css'),
     modernizr   = require('gulp-modernizr'),
     critical    = require('critical').stream,
     runSequence = require('run-sequence').use(gulp);
@@ -24,7 +26,7 @@ var nib         = require('nib'),
 
 > The module [gulp-notify](https://github.com/mikaelbr/gulp-notify) is totally optional. I found it very useful to get notifications when I'm developing a project.
 
-Also it will instal a _jQuery_ library, a customized lite version of _Modernizr_, the reset _Normalize.css_ and the _PictureFill_ library to deal with responsive images.
+Also it will install a _jQuery_ library, a customized lite version of _Modernizr_, the reset _Normalize.css_ and the _PictureFill_ library to deal with responsive images. Even though this libraries already exist in their corresponding folders in `src`, maybe you could want to get a new ones sometime. For achieve that you could run the task `npm init`.
 
 ## Developing
 When we finish the previous setup we will can to start our work in the "source" folder.
@@ -36,12 +38,12 @@ When a change is detected in these files the compiling task (in the case of _CSS
 ```javascript
 // Compile Stylus CSS
 gulp.task('style', function () {
-    gulp.src('src/assets/css/styl/main.styl')
+    gulp.src('src/assets/css/compile/styl/main.styl')
         .pipe(stylus({
-            compress: true, 
             use: nib(),
             'include css': true
         }))
+        .pipe(cleanCSS())
         .pipe(rename('style.css'))
         .pipe(gulp.dest('src/assets/css'))
         .pipe(notify('CSS Compiled!'))
@@ -52,7 +54,8 @@ gulp.task('style', function () {
 gulp.task('js', function(){
     return gulp.src(['src/assets/js/compile/vendor/jquery.js','src/assets/js/compile/vendor/*.js','src/assets/js/compile/*.js'])
         .pipe(concat('javascript.js'))
-        .pipe(gulp.dest('src/assets/js'))        
+        .pipe(gulp.dest('src/assets/js'))
+        .pipe(notify('JS Compiled!'))
         .pipe(uglify())
         .pipe(gulp.dest('src/assets/js'));
 });

@@ -8,6 +8,7 @@ var nib         = require('nib'),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
     notify      = require("gulp-notify"),
+    cleanCSS    = require('gulp-clean-css'),
     modernizr   = require('gulp-modernizr'),
     critical    = require('critical').stream,
     runSequence = require('run-sequence').use(gulp);
@@ -20,22 +21,24 @@ gulp.task('init', ['modernizr'], function() {
         .pipe(gulp.dest('src/assets/js/compile/vendor'))
     gulp.src('node_modules/normalize.css/normalize.css')
         .pipe(gulp.dest('src/assets/css/compile/vendor'))
+        .pipe(notify('The initialization of the project has been succesful! (PictureFill/jQuery/Normalize) copied to its folders.'))
 });
 
 gulp.task('modernizr', function() {
     return gulp.src('src/assets/js/compile/*.js')
         .pipe(modernizr(require('./modernizr.json')))
         .pipe(gulp.dest('src/assets/js/compile/vendor'))
+        .pipe(notify('Modernizr has been generated.'))
 });
 
 // Compile Stylus CSS
 gulp.task('style', function () {
-    gulp.src('src/assets/css/styl/main.styl')
+    gulp.src('src/assets/css/compile/styl/main.styl')
         .pipe(stylus({
-            compress: true, 
             use: nib(),
             'include css': true
         }))
+        .pipe(cleanCSS())
         .pipe(rename('style.css'))
         .pipe(gulp.dest('src/assets/css'))
         .pipe(notify('CSS Compiled!'))
@@ -46,7 +49,8 @@ gulp.task('style', function () {
 gulp.task('js', function(){
     return gulp.src(['src/assets/js/compile/vendor/jquery.js','src/assets/js/compile/vendor/*.js','src/assets/js/compile/*.js'])
         .pipe(concat('javascript.js'))
-        .pipe(gulp.dest('src/assets/js'))        
+        .pipe(gulp.dest('src/assets/js'))
+        .pipe(notify('JS Compiled!'))
         .pipe(uglify())
         .pipe(gulp.dest('src/assets/js'));
 });
@@ -71,6 +75,7 @@ gulp.task('critical', function () {
             pathPrefix: '/'
         }))
         .on('error', function(err) { log.error(err.message); })
+        .pipe(notify('Critical has inlined the corresponding CSS and JS to the HTML document.'))
         .pipe(gulp.dest('build'));
 });
 
@@ -85,6 +90,7 @@ gulp.task('copy', function() {
         .pipe(gulp.dest('build/assets/js/'))    
     gulp.src('src/assets/img/*')
         .pipe(gulp.dest('build/assets/img/'))
+        .pipe(notify('All the resources has been copied to the build folder.'))
 });
 
 gulp.task('build', function(callback) {
