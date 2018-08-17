@@ -1,6 +1,6 @@
 # pandora-boilerplate
 A **HTML5 Boilerplate** to start a project.
-This package is designed to have a **simple development environment** in one folder (src) and a **result files folder** (build) that it will be deployed to production. I am using [Stylus](http://stylus-lang.com) for preprocessing _CSS_.
+This package is designed to have a **simple development environment** in one folder (src) and a **result files folder** (build) that contains all the project files ready to be deployed. I am using [Stylus](http://stylus-lang.com) for preprocessing _CSS_.
 
 The first thing you have to do to start to work is install _NPM_ dependencies:
 ```
@@ -33,7 +33,7 @@ When we finish the previous setup we will can to start our work in the "source" 
 
 The tasks you can use for developing your project are basically **CSS compiling and javascript files concatenation**. We have to use the command `gulp watch` for watch changes in the files that we are working on. This task will watch if there are any changes in any of the `.styl` files in the _CSS_ folder and also the changes in any of the custom javascript files.
 
-When a change is detected in these files the compiling task (in the case of _CSS_) or the concatenation task (in the case of _JS_) it will be launched.
+When a change is detected in these files the compiling task (in the case of _CSS_) or the concatenation task (in the case of _JS_) will be launched.
 
 ```javascript
 // Compile Stylus CSS
