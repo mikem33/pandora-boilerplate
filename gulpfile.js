@@ -9,7 +9,6 @@ var nib         = require('nib'),
     uglify      = require('gulp-uglify'),
     notify      = require("gulp-notify"),
     cleanCSS    = require('gulp-clean-css'),
-    critical    = require('critical').stream,
     runSequence = require('gulp4-run-sequence');
 
 // The Init task it's for copy the javascript dependencies to the src folder.
