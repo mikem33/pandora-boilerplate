@@ -1,5 +1,4 @@
-var nib         = require('nib'),
-    del         = require('del'),
+var del         = require('del'),
     gulp        = require('gulp'),
     watch       = require('gulp-watch'),
     stylus      = require('gulp-stylus'),
@@ -15,7 +14,6 @@ var nib         = require('nib'),
 gulp.task('style', function (done) {
     gulp.src('source/assets/css/compile/styl/style.styl')
         .pipe(stylus({
-            use: nib(),
             'include css': true
         }))
         .pipe(cleanCSS())
