@@ -8,8 +8,7 @@ npm install --save
 ```
 This will install all the necessary stuff to start to work. 
 ```javascript
-var nib         = require('nib'),
-    del         = require('del'),
+var del         = require('del'),
     gulp        = require('gulp'),
     watch       = require('gulp-watch'),
     stylus      = require('gulp-stylus'),
@@ -18,6 +17,7 @@ var nib         = require('nib'),
     uglify      = require('gulp-uglify'),
     notify      = require("gulp-notify"),
     cleanCSS    = require('gulp-clean-css'),
+    realFavicon = require('gulp-real-favicon'),
     runSequence = require('gulp4-run-sequence');
 ```
 
