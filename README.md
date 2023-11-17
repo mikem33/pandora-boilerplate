@@ -32,33 +32,31 @@ When a change is detected in these files the compiling task (in the case of _CSS
 ```javascript
 // Compile Stylus CSS
 gulp.task('style', function (done) {
-    gulp.src('src/assets/css/compile/styl/style.styl')
+    gulp.src('source/assets/css/compile/styl/style.styl')
         .pipe(stylus({
-            use: nib(),
             'include css': true
         }))
-        .pipe(cleanCSS())
         .pipe(rename('style.css'))
-        .pipe(gulp.dest('src/assets/css'))
+        .pipe(gulp.dest('source/assets/css'))
         .pipe(notify('CSS Compiled!'));
     done();
 });
 
 // Generate Javascript
 gulp.task('js', function(done){
-    return gulp.src(['src/assets/javascript/compile/*.js'])
+    return gulp.src(['source/assets/javascript/compile/*.js'])
         .pipe(concat('javascript.js'))
-        .pipe(gulp.dest('src/assets/javascript'))
+        .pipe(gulp.dest('source/assets/javascript'))
         .pipe(notify('JS Compiled!'))
         .pipe(uglify())
-        .pipe(gulp.dest('src/assets/javascript'));
+        .pipe(gulp.dest('source/assets/javascript'));
     done();
 });
 
 // Watch
 gulp.task('watch', function() {
-    gulp.watch('src/assets/javascript/compile/*.js', gulp.series('js'));
-    gulp.watch('src/assets/css/compile/styl/*.styl', gulp.series('style'));
+    gulp.watch('source/assets/javascript/compile/*.js', gulp.series('js'));
+    gulp.watch('source/assets/css/compile/styl/*.styl', gulp.series('style'));
 });
 ```
 
