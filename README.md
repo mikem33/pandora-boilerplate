@@ -16,7 +16,6 @@ var del         = require('del'),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
     notify      = require("gulp-notify"),
-    cleanCSS    = require('gulp-clean-css'),
     realFavicon = require('gulp-real-favicon'),
     runSequence = require('gulp4-run-sequence');
 ```
