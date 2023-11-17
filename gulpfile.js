@@ -5,8 +5,7 @@ var del         = require('del'),
     rename      = require("gulp-rename"),
     concat      = require('gulp-concat'),
     uglify      = require('gulp-uglify'),
-    notify      = require("gulp-notify"),
-    cleanCSS    = require('gulp-clean-css'),
+    notify      = require("gulp-notify"),    
     realFavicon = require('gulp-real-favicon'),
     runSequence = require('gulp4-run-sequence');
 
@@ -14,9 +13,9 @@ var del         = require('del'),
 gulp.task('style', function (done) {
     gulp.src('source/assets/css/compile/styl/style.styl')
         .pipe(stylus({
+            compress : true,
             'include css': true
         }))
-        .pipe(cleanCSS())
         .pipe(rename('style.css'))
         .pipe(gulp.dest('source/assets/css'))
         .pipe(notify('CSS Compiled!'));
@@ -116,6 +115,8 @@ gulp.task('copy', function(done) {
         .pipe(gulp.dest('build/assets/css/'))
     gulp.src('source/assets/javascript/*.js')
         .pipe(gulp.dest('build/assets/javascript/'))
+    gulp.src('source/assets/images/*')
+        .pipe(gulp.dest('build/assets/images/'))
     gulp.src('source/assets/images/*/*')
         .pipe(gulp.dest('build/assets/images/'))
         .pipe(notify('All the resources has been copied to the build folder.'));
