@@ -183,21 +183,21 @@ a
 :root
     +above(1200)
         /* $min-width: $1200px */
-        --section 4rem
-        --space 4rem
+        --h-space rem(64)
+        --v-space rem(64)
     +between(768,1199)
         /* $min-width: $768px / $max-width: $1199px */
-        --section 2.85rem
-        --space 1.85rem
+        --h-space rem(45)
+        --v-space rem(30)
     +below(767)
         /* $max-width: $767px */
-        --section 2rem
-        --space 1rem
+        --h-space rem(32)
+        --v-space rem(16)
 
-.section
-    padding-top var(--section)
-    padding-bottom var(--section)
+.h-space
+    padding-top var(--h-space)
+    padding-bottom var(--v-space)
 
-.space
-    padding-left var(--space)
-    padding-right var(--space)
+.v-space
+    padding-left var(--h-space)
+    padding-right var(--v-space)
