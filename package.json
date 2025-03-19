@@ -26,7 +26,6 @@
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-notify": "^4.0.0",
-    "gulp-real-favicon": "^0.3.2",
     "gulp-rename": "^1.2.3",
     "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^2.1.2",
