@@ -8,16 +8,14 @@ npm install --save
 ```
 This will install all the necessary stuff to start to work. 
 ```javascript
-var del         = require('del'),
-    gulp        = require('gulp'),
-    watch       = require('gulp-watch'),
-    stylus      = require('gulp-stylus'),
-    rename      = require("gulp-rename"),
-    concat      = require('gulp-concat'),
-    uglify      = require('gulp-uglify'),
-    notify      = require("gulp-notify"),
-    realFavicon = require('gulp-real-favicon'),
-    runSequence = require('gulp4-run-sequence');
+const del = require('del'),
+      gulp = require('gulp'),
+      watch = require('gulp-watch'),
+      stylus = require('gulp-stylus'),
+      rename = require("gulp-rename"),
+      concat = require('gulp-concat'),
+      uglify = require('gulp-uglify'),
+      notify = require("gulp-notify");
 ```
 
 > The module [gulp-notify](https://github.com/mikaelbr/gulp-notify) is totally optional. I found it very useful to get notifications when I'm developing a project.
@@ -31,32 +29,31 @@ When a change is detected in these files the compiling task (in the case of _CSS
 
 ```javascript
 // Compile Stylus CSS
-gulp.task('style', function (done) {
-    gulp.src('source/assets/css/compile/styl/style.styl')
+gulp.task('style', function () {
+    return gulp.src('source/assets/css/compile/styl/style.styl')
         .pipe(stylus({
+            compress: true,
             'include css': true
         }))
         .pipe(rename('style.css'))
         .pipe(gulp.dest('source/assets/css'))
-        .pipe(notify('CSS Compiled!'));
-    done();
+        .pipe(notify({ message: 'CSS Compiled!', onLast: true }));
 });
 
 // Generate Javascript
-gulp.task('js', function(done){
+gulp.task('js', function () {
     return gulp.src(['source/assets/javascript/compile/*.js'])
         .pipe(concat('javascript.js'))
         .pipe(gulp.dest('source/assets/javascript'))
-        .pipe(notify('JS Compiled!'))
         .pipe(uglify())
-        .pipe(gulp.dest('source/assets/javascript'));
-    done();
+        .pipe(gulp.dest('source/assets/javascript'))
+        .pipe(notify({ message: 'JS Compiled!', onLast: true }));
 });
 
 // Watch
-gulp.task('watch', function() {
-    gulp.watch('source/assets/javascript/compile/*.js', gulp.series('js'));
-    gulp.watch('source/assets/css/compile/styl/*.styl', gulp.series('style'));
+gulp.task('watch', function () {
+    gulp.watch('source/assets/javascript/compile/**/*.js', gulp.series('js'));
+    gulp.watch('source/assets/css/compile/styl/**/*.styl', gulp.series('style'));
 });
 ```
 
