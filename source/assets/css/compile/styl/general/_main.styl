@@ -1,16 +1,18 @@
 /* ---------------------------- *\
-    
-    $Helpers
 
-\* ---------------------------- */
+    $Main
+
+\*----------------------------- */
+
+// Own reset
 
 *,
 *:before,
 *:after
     box-sizing border-box
-  
+
 html
-    font-size(16)
+    font-size rem(16)
 
 html,
 button,
@@ -32,9 +34,6 @@ body
     background $darkGrey
     color white
     text-shadow none
-
-code::selection
-    background-color $lightGrey
 
 hr
     border 0
@@ -63,47 +62,14 @@ textarea
     color #000
     padding 0.2em 0
 
-/* Declarating general styles for p and h$ */
-
-p, li
-    font-size(16)
-h1, h2, h3, h4, h5, h6
-    font-weight 700
-h1, h2, h3, h4, h5, h6, p
-    margin-top 0
-h1, .alpha
-    fontSize(27)
-h2, .beta
-    fontSize(24)
-h3, .gamma
-    fontSize(21)
-h4, .delta
-    fontSize(18)
-h5, .epsilon
-    fontSize(15)
-h6, .zeta
-    fontSize(12)
-strong
-    font-weight 700
-a
-    text-decoration none
-    &:visited
-        color inherit
+// $Layout
 
 .wrapper
     width 100%
     margin 0 auto
-    max-width 1200px
+    if wrapperSize
+        max-width $wrapperSize
     position relative
-
-.row
-    width 100%
-
-.left
-    float left
-
-.right
-    float right
 
 .align
     width 100%
@@ -122,6 +88,33 @@ a
 
 .flex-centering
     centerFlexbox(true,true)
+
+.grid
+    display grid
+    +above(1024)
+        for $num in (1..6)
+            &--{$num}
+                grid-template-columns repeat($num, 1fr)
+
+.h-space
+    padding-left var(--h-space)
+    padding-right var(--h-space)
+
+.v-space
+    padding-top var(--v-space)
+    padding-bottom var(--v-space)
+
+// $Font $Weight
+
+h1, h2, h3, h4, h5, h6, strong
+    font-weight 700
+
+a
+    text-decoration none
+    &:visited
+        color inherit
+
+// $Elements
 
 .overlay
     top 0
@@ -142,6 +135,20 @@ a
     -webkit-tap-highlight-color transparent
     -webkit-tap-highlight-color rgba(0,0,0,0)
 
+.embed-container
+    height 0
+    overflow hidden
+    position relative
+    padding-bottom 56.25%
+    iframe
+        top 0
+        left 0
+        width 100%
+        height 100%
+        position absolute
+
+// $States
+
 .nondisplayed
     display none
 
@@ -154,50 +161,3 @@ a
     opacity 1
     visibility visible
     transition opacity .3s ease-out, visibility .3s ease-out
-
-.responsive-video
-    .content
-        height 0
-        clear both
-        margin 2em 0
-        overflow hidden
-        padding-top 30px
-        position relative
-        padding-bottom 56.25% 
-    iframe
-        top 0
-        left 0
-        width 100%
-        height 100%
-        position absolute
-
-.clearfix
-    clearfix()
-
-/* ---------------------------- *\
-    
-    $Media $Queries
-
-\* ---------------------------- */
-
-:root
-    +above(1200)
-        /* $min-width: $1200px */
-        --h-space rem(64)
-        --v-space rem(64)
-    +between(768,1199)
-        /* $min-width: $768px / $max-width: $1199px */
-        --h-space rem(45)
-        --v-space rem(30)
-    +below(767)
-        /* $max-width: $767px */
-        --h-space rem(32)
-        --v-space rem(16)
-
-.h-space
-    padding-top var(--h-space)
-    padding-bottom var(--v-space)
-
-.v-space
-    padding-left var(--h-space)
-    padding-right var(--v-space)
