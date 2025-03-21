@@ -8,17 +8,17 @@ rem($value)
     return unit($value/16, 'rem')
 
 // Fonts mixin
-font-url(file)
-    return '../../assets/fonts/' + file
+font-url($file)
+    return '../../assets/fonts/' + $file
 
-webfont(family, file, weight = normal, style = normal)
+webfont($family, $file, $weight = normal, $style = normal)
     @font-face
-        font-family family
-        src url(font-url(file + '.woff2')) format('woff2'),
-            url(font-url(file + '.woff')) format('woff')
+        font-family $family
+        src url(font-url($file + '.woff2')) format('woff2'),
+            url(font-url($file + '.woff')) format('woff')
         font-display swap
-        font-weight weight
-        font-style style
+        font-weight $weight
+        font-style $style
 
 // $Center Object function.
 centerObject($horizontal = true, $vertical = true)
@@ -60,31 +60,31 @@ placeholder()
 above($value, $width = true)
     $value = rem($value)
     if $width == true
-        media = '(min-width: %s)' % $value
+        $media = '(min-width: %s)' % $value
     else
-        media = '(min-height: %s)' % $value
-    @media media
+        $media = '(min-height: %s)' % $value
+    @media $media
         {block}
         
 below($value, $width = true)
     $value = rem($value)
     if $width == true
-        media = '(max-width: %s)' % $value
+        $media = '(max-width: %s)' % $value
     else
-        media = '(max-height: %s)' % $value
-    @media media
+        $media = '(max-height: %s)' % $value
+    @media $media
         {block}
 
 between($minValue, $maxValue, $width = true)
     $minValue = rem($minValue)
     $maxValue = rem($maxValue)
     if $width == true
-        from = '(min-width: %s)' % $minValue
-        to = '(max-width: %s)' % $maxValue
-        media = from + ' and ' + to
+        $from = '(min-width: %s)' % $minValue
+        $to = '(max-width: %s)' % $maxValue
+        $media = $from + ' and ' + $to
     else
-        from = '(min-height: %s)' % $minValue
-        to = '(max-height: %s)' % $maxValue
-        media = from + ' and ' + to
-    @media media
+        $from = '(min-height: %s)' % $minValue
+        $to = '(max-height: %s)' % $maxValue
+        $media = $from + ' and ' + $to
+    @media $media
         {block}
