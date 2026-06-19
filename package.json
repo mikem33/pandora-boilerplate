@@ -23,9 +23,6 @@
     "url": "https://github.com/mikem33/pandora-boilerplate/issues"
   },
   "homepage": "https://github.com/mikem33/pandora-boilerplate",
-  "pnpm": {
-    "onlyBuiltDependencies": ["esbuild"]
-  },
   "devDependencies": {
     "stylus": "^0.64.0",
     "vite": "^6.1.6"
