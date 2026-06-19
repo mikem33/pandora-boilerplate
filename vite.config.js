@@ -7,6 +7,9 @@ export default defineConfig({
     outDir: '../build',
     emptyOutDir: true,
   },
+  server: {
+    allowedHosts: true,
+  },
   css: {
     preprocessorOptions: {
       styl: {
