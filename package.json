@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/mikem33/pandora-boilerplate",
   "devDependencies": {
-    "stylus": "^0.62.1",
+    "stylus": "^0.64.0",
     "vite": "^6.1.6"
   }
 }
