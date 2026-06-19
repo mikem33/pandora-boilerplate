@@ -1,60 +1,80 @@
 # pandora-boilerplate
-A **HTML5 Boilerplate** to start a project.
-This package is designed to have a **simple development environment** in one folder (source) and a **result files folder** (build) that contains all the project files ready to be deployed. I am using [Stylus](http://stylus-lang.com) for preprocessing _CSS_.
 
-The first thing you have to do to start to work is install _NPM_ dependencies:
-```
-npm install --save
-```
-This will install all the necessary stuff to start to work. 
-```javascript
-const del = require('del'),
-      gulp = require('gulp'),
-      watch = require('gulp-watch'),
-      stylus = require('gulp-stylus'),
-      rename = require("gulp-rename"),
-      concat = require('gulp-concat'),
-      uglify = require('gulp-uglify'),
-      notify = require("gulp-notify");
-```
+A modern **HTML5 Boilerplate** to start your next project with a simple yet powerful development environment.
 
-> The module [gulp-notify](https://github.com/mikaelbr/gulp-notify) is totally optional. I found it very useful to get notifications when I'm developing a project.
+This boilerplate provides a clean separation between your **development files** (in the `source` folder) and **production-ready output** (in the `build` folder). It uses [Stylus](http://stylus-lang.com) for CSS preprocessing and [Vite](https://vitejs.dev) as the modern build tool and dev server.
 
-## Developing
-When we finish the previous setup we can start our work in the "source" folder.
+## Prerequisites
 
-The tasks you can use for developing your project are basically **CSS compiling and javascript files concatenation**. We have to use the command `gulp watch` for watch changes in the files that we are working on. This task will watch if there are any changes in any of the `.styl` files in the _CSS_ folder and also the changes in any of the custom javascript files.
+- **Node.js 22+** (see `.nvmrc` for the pinned version)
+- **npm** or **pnpm** (pnpm recommended for faster installs)
 
-When a change is detected in these files the compiling task (in the case of _CSS_) or the concatenation task (in the case of _JS_) will be launched.
+## Getting Started
 
-```javascript
-// Compile Stylus CSS
-gulp.task('style', function () {
-    return gulp.src('source/assets/css/compile/styl/style.styl')
-        .pipe(stylus({
-            compress: true,
-            'include css': true
-        }))
-        .pipe(rename('style.css'))
-        .pipe(gulp.dest('source/assets/css'))
-        .pipe(notify({ message: 'CSS Compiled!', onLast: true }));
-});
-
-// Generate Javascript
-gulp.task('js', function () {
-    return gulp.src(['source/assets/javascript/compile/*.js'])
-        .pipe(concat('javascript.js'))
-        .pipe(gulp.dest('source/assets/javascript'))
-        .pipe(uglify())
-        .pipe(gulp.dest('source/assets/javascript'))
-        .pipe(notify({ message: 'JS Compiled!', onLast: true }));
-});
-
-// Watch
-gulp.task('watch', function () {
-    gulp.watch('source/assets/javascript/compile/**/*.js', gulp.series('js'));
-    gulp.watch('source/assets/css/compile/styl/**/*.styl', gulp.series('style'));
-});
+1. Install dependencies:
+```bash
+npm install
+# or
+pnpm install
 ```
 
-When we finish our work, we will use `gulp build` to generate the final project that we are using as production site. This task will copy to the `build` folder all the necessary files to deploy the project.
+2. Start the development server:
+```bash
+npm run dev
+# or
+pnpm dev
+```
+
+The dev server will be available at `http://localhost:5173` by default.
+
+## Development
+
+The development workflow is streamlined with Vite's instant HMR (Hot Module Replacement):
+
+- **CSS Compilation**: Place your `.styl` files in `source/assets/css/` and they'll be automatically compiled to CSS
+- **JavaScript**: Your scripts in `source/assets/javascript/` are bundled and optimized
+- **Live Reload**: Changes are reflected instantly in the browser
+
+### Available Scripts
+
+- `npm run dev` — Start the development server with hot reload
+- `npm run build` — Build the project for production (output in `build/` folder)
+- `npm run preview` — Preview the production build locally
+
+### Custom Hostnames
+
+You can access the dev server from custom hostnames by configuring them in `vite.config.js`. This is useful for testing cross-origin scenarios or accessing the dev server from Docker containers.
+
+## Production Build
+
+When ready to deploy, generate the optimized production build:
+
+```bash
+npm run build
+```
+
+This will create a `build` folder containing all necessary files ready for deployment.
+
+## Project Structure
+
+```
+pandora-boilerplate/
+├── source/              # Development files
+│   ├── assets/
+│   │   ├── css/        # Stylus files and compiled CSS
+│   │   └── javascript/ # JavaScript files
+│   └── index.html      # Main HTML entry point
+├── build/              # Production build output (generated)
+├── vite.config.js      # Vite configuration
+└── package.json        # Project metadata and scripts
+```
+
+## Tech Stack
+
+- **Build Tool**: [Vite](https://vitejs.dev) 6.x
+- **CSS Preprocessor**: [Stylus](http://stylus-lang.com) 0.64
+- **Runtime**: Node.js 22+
+
+## License
+
+ISC — See package.json for more details
